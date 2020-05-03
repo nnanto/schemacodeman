@@ -1,0 +1,39 @@
+name: 'SchemaRegistry'
+author: 'Naveen Anto'
+description: 'Helps in maintaining schema versions with code'
+
+inputs:
+    languages:
+        description: 'Comma separated languages for code generation as required by code generator.'
+        required: true
+    schema_files:
+        description: 'Comma separated schema files to be processed (Glob syntax accepted).'
+        required: true
+    codepath:
+        description: 'Director(y|ies) to place the generated code.'
+        required: false
+        default: 'code/'
+    code_generator:
+        description: 'Shell script that generates the code in {codepath}'
+        required: false
+        default: 'code_generator.sh'
+    branch_prefix:
+        description: 'Branch prefix name to be used while creating a code_branch [ branch name will be {branch_prefix}-{ref_branch_name}/{language} ]'
+        required: false
+        default: 'gencode'
+    commit_msg:
+        description: 'Custom commit message for generated code. Defaults to `Code generated for {commit_sha}`'
+        required: false
+        default: '_'
+        
+
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    args:
+        - '--languages=${{ inputs.languages }}'
+        - '--schema_files=${{ inputs.schema_files }}'
+        - '--codepath=${{ inputs.codepath }}'
+        - '--code_generator=${{ inputs.code_generator }}'
+        - '--branch_prefix=${{ inputs.branch_prefix }}'
+        - '--commit_msg=${{ inputs.commit_msg }}'
