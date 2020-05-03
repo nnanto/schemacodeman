@@ -37,3 +37,7 @@ runs:
         - '--code_generator=${{ inputs.code_generator }}'
         - '--branch_prefix=${{ inputs.branch_prefix }}'
         - '--commit_msg=${{ inputs.commit_msg }}'
+
+branding:
+    icon: 'git-branch'  
+    color: 'gray-dark'
