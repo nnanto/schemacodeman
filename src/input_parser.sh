@@ -103,8 +103,8 @@ codepath=${codepath:-"schema"}
 latest_commit=$(git log --oneline | head -n 1);
 latest_commit_sha=${latest_commit:0:6};
 
-if [[ $commit_msg == "_" ]]; then 
-    $commit_msg = "";
+if [[ "$commit_msg" == "_" ]]; then 
+    commit_msg="";
 fi
 
 # Defaults to "Code generated for the {latest_commit_sha}"
